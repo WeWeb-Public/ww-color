@@ -68,6 +68,7 @@ export default {
 			noClass: false,
 			noAnim: this.wwAttrs.wwNoAnim,
 		});
+		this.$emit('ww-loaded', this);
 	}
 };
 </script>
