@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="ww-color">
 	</div>
 </template>
  
@@ -8,7 +8,7 @@
 export default {
 	name: "ww-color",
 	props: {
-		wwObjectRef: Object,
+		wwObject: Object,
 		wwAttrs: {
 			type: Object,
 			default: {}
@@ -18,10 +18,6 @@ export default {
 		return {};
 	},
 	computed: {
-		wwObject() {
-			//return this.wwObjectRef.wwGet();
-			return this.$store.state.wwObjects[this.wwObjectRef.uniqueId];
-		},
 	},
 	watch: {
 	},
