@@ -1,4 +1,4 @@
-import wwObject from './wwObjectSrc.vue'
+import wwObject from './wwObjectColor.vue'
 
 const name = "ww-color";
 const wwEnableMetrics = false;
