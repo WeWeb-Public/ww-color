@@ -16,10 +16,12 @@ export default {
     },
     data() {
         return {
-            wwObject: this.wwObjectCtrl.get(),
         };
     },
     computed: {
+        wwObject() {
+            return this.wwObjectCtrl.get();
+        }
     },
     watch: {
     },
