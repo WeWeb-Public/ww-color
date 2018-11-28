@@ -1,7 +1,6 @@
 import wwObject from './wwObjectColor.vue'
 
 const name = "ww-color";
-const wwEnableMetrics = false;
 
 const addComponent = function () {
     if (window.vm) {
@@ -13,7 +12,11 @@ const addComponent = function () {
                     backgroundColor: "#ffffff"
                 }
             },
-            enableMetrics: wwEnableMetrics,
+            upsales: {
+                wwAnalytics: {
+                    click: false
+                }
+            },
             /* wwManager:start */
             cmsOptions: {
             }
