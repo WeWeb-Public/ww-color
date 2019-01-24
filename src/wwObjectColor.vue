@@ -31,6 +31,7 @@ export default {
 
             let styles = {}
             styles.background = this.wwObject.content.data.backgroundColor || 'transparent'
+            styles.backgroundImage = this.wwObject.content.data.gradient || '';
 
             styles.paddingBottom = this.wwAttrs.wwCategory == 'background' ? '' : (Math.max(0, this.wwObject.ratio) || 66.66) + '%';
 
@@ -50,7 +51,6 @@ export default {
             styles.borderColor = this.wwObject.content.data.style.borderColor || 'black';
             styles.borderStyle = this.wwObject.content.data.style.borderStyle || 'none';
 
-            console.log(styles)
             return styles;
 
         }
@@ -122,7 +122,7 @@ export default {
                     },
                     icon: 'wwi wwi-color',
                     shortcut: 'c',
-                    next: 'COLOR_PICKER'
+                    next: 'GRADIENT'
                 },
                 EDIT_STYLE: {
                     separator: {
@@ -261,6 +261,13 @@ export default {
                 \================================================================================================*/
                 if (typeof (result.color) != 'undefined') {
                     this.wwObject.content.data.backgroundColor = result.color;
+                    this.wwObject.content.data.gradient = null;
+                }
+                if (typeof (result.gradient) != 'undefined') {
+                    this.wwObject.content.data.gradient = result.gradient;
+                }
+                if (typeof (result.gradientColor) != 'undefined') {
+                    this.wwObject.content.data.color = result.gradientColor;
                 }
 
                 /*=============================================m_ÔÔ_m=============================================\
