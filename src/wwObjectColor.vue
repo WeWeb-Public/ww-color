@@ -153,49 +153,7 @@ export default {
                     icon: 'wwi wwi-ratio',
                     shortcut: 'r',
                     next: 'WWCOLOR_RATIO'
-                },
-                EDIT_ANIM: {
-                    separator: {
-                        en_GB: 'Interaction',
-                        fr_FR: 'Interaction'
-                    },
-                    title: {
-                        en_GB: 'Animation',
-                        fr_FR: 'Animation'
-                    },
-                    desc: {
-                        en_GB: 'Change animation',
-                        fr_FR: 'Choisir l\'animation à l\'apparition de l\'image'
-                    },
-                    icon: 'wwi wwi-anim',
-                    shortcut: 'a',
-                    next: 'ANIMATION'
-                },
-                EDIT_HIDE: {
-                    separator: {
-                        en_GB: 'More',
-                        fr_FR: 'Plus'
-                    },
-                    title: {
-                        en_GB: 'Show / Hide',
-                        fr_FR: 'Montrer / Cacher'
-                    },
-                    icon: 'wwi wwi-hidden',
-                    shortcut: 'h',
-                    next: null,
-                    result: {
-                        hidden: true
-                    }
-                },
-                EDIT_CHANGE: {
-                    title: {
-                        en_GB: 'Change object type',
-                        fr_FR: 'Changer le type d\'objet'
-                    },
-                    icon: 'wwi wwi-switch',
-                    shortcut: 't',
-                    next: 'SELECT_WWOBJECT'
-                },
+                }
             }
 
             if (this.wwAttrs.wwCategory == 'background') {
@@ -207,7 +165,7 @@ export default {
                     en_GB: 'Edit Color',
                     fr_FR: 'Editer la couleur'
                 },
-                type: 'wwPopupList',
+                type: 'wwPopupEditWwObject',
                 buttons: null,
                 storyData: {
                     list: editList
