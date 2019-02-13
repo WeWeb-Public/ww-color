@@ -5,7 +5,7 @@
 
 <script>
 export default {
-    name: "ww-color",
+    name: "__COMPONENT_NAME__",
     props: {
         wwObjectCtrl: Object,
         wwAttrs: {
