@@ -38,8 +38,8 @@ const addComponent = function () {
                         {
                             name: 'OPTIONS',
                             text: {
-                                en_GB: 'Options...',
-                                fr_FR: 'Options...'
+                                en: 'Options...',
+                                fr: 'Options...'
                             },
                             icon: 'wwi wwi-edit-other',
                             action: 'edit'
@@ -47,8 +47,8 @@ const addComponent = function () {
                         {
                             name: 'COLOR',
                             text: {
-                                en_GB: 'Color',
-                                fr_FR: 'Couleur'
+                                en: 'Color',
+                                fr: 'Couleur'
                             },
                             icon: 'wwi wwi-color',
                             action: 'changeColor'

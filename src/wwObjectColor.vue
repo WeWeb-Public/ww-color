@@ -96,16 +96,16 @@ export default {
             let editList = {
                 SELECT_COLOR: {
                     separator: {
-                        en_GB: 'Color / Gradient',
-                        fr_FR: 'Couleur / Dégradé'
+                        en: 'Color / Gradient',
+                        fr: 'Couleur / Dégradé'
                     },
                     title: {
-                        en_GB: 'Select color',
-                        fr_FR: 'Sélectionner une couleur'
+                        en: 'Select color',
+                        fr: 'Sélectionner une couleur'
                     },
                     desc: {
-                        en_GB: '',
-                        fr_FR: ''
+                        en: '',
+                        fr: ''
                     },
                     icon: 'wwi wwi-color',
                     shortcut: 'c',
@@ -113,12 +113,12 @@ export default {
                 },
                 SELECT_GRADIENT: {
                     title: {
-                        en_GB: 'Select gradiant',
-                        fr_FR: 'Sélectionner un dégradé'
+                        en: 'Select gradiant',
+                        fr: 'Sélectionner un dégradé'
                     },
                     desc: {
-                        en_GB: 'Generate a gradient',
-                        fr_FR: 'Générer un dégradé'
+                        en: 'Generate a gradient',
+                        fr: 'Générer un dégradé'
                     },
                     icon: 'wwi wwi-color',
                     shortcut: 'c',
@@ -126,16 +126,16 @@ export default {
                 },
                 EDIT_STYLE: {
                     separator: {
-                        en_GB: 'Style',
-                        fr_FR: 'Style'
+                        en: 'Style',
+                        fr: 'Style'
                     },
                     title: {
-                        en_GB: 'Change color style',
-                        fr_FR: 'Changer l\'apparence de la couleur'
+                        en: 'Change color style',
+                        fr: 'Changer l\'apparence de la couleur'
                     },
                     desc: {
-                        en_GB: 'Borders, shadow, ...',
-                        fr_FR: 'Bordures, ombres, ...'
+                        en: 'Borders, shadow, ...',
+                        fr: 'Bordures, ombres, ...'
                     },
                     icon: 'wwi wwi-edit-style',
                     shortcut: 's',
@@ -143,12 +143,12 @@ export default {
                 },
                 EDIT_RATIO: {
                     title: {
-                        en_GB: 'Change color ratio',
-                        fr_FR: 'Changer le ratio de la couleur'
+                        en: 'Change color ratio',
+                        fr: 'Changer le ratio de la couleur'
                     },
                     desc: {
-                        en_GB: 'Portrait, square, landscape, ...',
-                        fr_FR: 'Portrait, carré, paysage, ...'
+                        en: 'Portrait, square, landscape, ...',
+                        fr: 'Portrait, carré, paysage, ...'
                     },
                     icon: 'wwi wwi-ratio',
                     shortcut: 'r',
@@ -162,8 +162,8 @@ export default {
 
             wwLib.wwPopups.addStory('WWCOLOR_EDIT', {
                 title: {
-                    en_GB: 'Edit Color',
-                    fr_FR: 'Editer la couleur'
+                    en: 'Edit Color',
+                    fr: 'Editer la couleur'
                 },
                 type: 'wwPopupEditWwObject',
                 buttons: null,
@@ -173,15 +173,15 @@ export default {
             })
             wwLib.wwPopups.addStory('WWCOLOR_RATIO', {
                 title: {
-                    en_GB: 'Color Ratio',
-                    fr_FR: 'Ratio de la couleur'
+                    en: 'Color Ratio',
+                    fr: 'Ratio de la couleur'
                 },
                 type: 'wwPopupImageRatio',
                 buttons: {
                     NEXT: {
                         text: {
-                            en_GB: 'Next',
-                            fr_FR: 'Suivant'
+                            en: 'Next',
+                            fr: 'Suivant'
                         },
                         next: 'WWCOLOR_STYLE'
                     }
@@ -189,15 +189,15 @@ export default {
             })
             wwLib.wwPopups.addStory('WWCOLOR_STYLE', {
                 title: {
-                    en_GB: 'Color style',
-                    fr_FR: 'Style de la couleur'
+                    en: 'Color style',
+                    fr: 'Style de la couleur'
                 },
                 type: 'wwPopupImageStyle',
                 buttons: {
                     OK: {
                         text: {
-                            en_GB: 'Ok',
-                            fr_FR: 'Valider'
+                            en: 'Ok',
+                            fr: 'Valider'
                         },
                         next: false
                     }
