@@ -76,12 +76,18 @@ export default {
             wwLib.wwObjectHover.setLock(this);
 
             let options = {
-                firstPage: 'COLOR_PICKER'
+                firstPage: 'COLOR_PICKER',
+                data: {
+                    wwObject: this.wwObject
+                }
             }
 
             try {
                 const result = await wwLib.wwPopups.open(options)
-                this.wwObject.content.data.backgroundColor = result.color;
+                if (typeof (result.color) != 'undefined') {
+                    this.wwObject.content.data.backgroundColor = result.color;
+                    this.wwObject.content.data.gradient = null;
+                }
 
                 this.wwObjectCtrl.update(this.wwObject);
             } catch (error) {
