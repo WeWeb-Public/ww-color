@@ -182,7 +182,7 @@ export default {
                     en: 'Color Ratio',
                     fr: 'Ratio de la couleur'
                 },
-                type: 'wwPopupImageRatio',
+                type: 'wwPopupWwObjectRatio',
                 buttons: {
                     NEXT: {
                         text: {
@@ -198,7 +198,7 @@ export default {
                     en: 'Color style',
                     fr: 'Style de la couleur'
                 },
-                type: 'wwPopupImageStyle',
+                type: 'wwPopupWwObjectStyle',
                 buttons: {
                     OK: {
                         text: {
