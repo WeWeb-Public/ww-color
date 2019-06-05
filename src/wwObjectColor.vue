@@ -42,7 +42,8 @@ export default {
             //BORDER
             const w = this.$el.getBoundingClientRect().width;
 
-            const borderRadius = w * (this.wwObject.content.data.style.borderRadius ? this.wwObject.content.data.style.borderRadius : 0) / 100;
+            const unit = this.wwObject.content.data.style.borderRadiusUnit || '%';
+            const borderRadius = (this.wwObject.content.data.style.borderRadius / (unit == '%' ? 2 : 1) || 0) + unit;
             styles.borderRadius = borderRadius + 'px';
 
             const borderWidth = w * (this.wwObject.content.data.style.borderWidth ? this.wwObject.content.data.style.borderWidth : 0) / 100;
@@ -245,6 +246,9 @@ export default {
                 }
                 if (typeof (result.borderRadius) != 'undefined') {
                     this.wwObject.content.data.style.borderRadius = result.borderRadius;
+                }
+                if (typeof (result.borderRadiusUnit) != 'undefined') {
+                    this.wwObject.content.data.style.borderRadiusUnit = result.borderRadiusUnit;
                 }
                 if (typeof (result.borderStyle) != 'undefined') {
                     this.wwObject.content.data.style.borderStyle = result.borderStyle;
