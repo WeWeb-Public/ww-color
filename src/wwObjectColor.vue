@@ -27,13 +27,24 @@ export default {
                 return {}
             }
 
-            this.wwObject.content.data.style = this.wwObject.content.data.style || {};
-
             let styles = {}
-            styles.background = this.wwObject.content.data.backgroundColor || 'transparent'
-            styles.backgroundImage = this.wwObject.content.data.gradient || '';
+            styles.background = this.wwObject.data.backgroundColor || 'transparent'
+            styles.backgroundImage = this.wwObject.data.gradient || '';
 
-            styles.paddingBottom = this.wwAttrs.wwCategory == 'background' ? '' : (Math.max(0, this.wwObject.ratio) || 66.66) + '%';
+            let ratio = 100;
+            if (this.wwAttrs.wwFixedRatio) {
+                try {
+                    ratio = parseFloat(this.wwAttrs.wwFixedRatio);
+                }
+                catch (error) {
+                    console.log("wwRatio error", error);
+                }
+            }
+            else {
+                ratio = this.wwObject.ratio;
+            }
+
+            styles.paddingBottom = this.wwAttrs.wwCategory == 'background' ? '' : (Math.max(0, ratio) || 66.66) + '%';
 
 
             //FORMAT
@@ -42,15 +53,16 @@ export default {
             //BORDER
             const w = this.$el.getBoundingClientRect().width;
 
-            const unit = this.wwObject.content.data.style.borderRadiusUnit || '%';
-            const borderRadius = (this.wwObject.content.data.style.borderRadius / (unit == '%' ? 2 : 1) || 0) + unit;
-            styles.borderRadius = borderRadius + 'px';
 
-            const borderWidth = w * (this.wwObject.content.data.style.borderWidth ? this.wwObject.content.data.style.borderWidth : 0) / 100;
+            const unit = this.wwObject.style.borderRadiusUnit || '%';
+            const borderRadius = (this.wwObject.style.borderRadius / (unit == '%' ? 2 : 1)) + unit;
+            styles.borderRadius = borderRadius;
+
+            const borderWidth = this.wwObject.style.borderWidth || 0;
             styles.borderWidth = borderWidth + 'px';
 
-            styles.borderColor = this.wwObject.content.data.style.borderColor || 'black';
-            styles.borderStyle = this.wwObject.content.data.style.borderStyle || 'none';
+            styles.borderColor = this.wwObject.style.borderColor || 'black';
+            styles.borderStyle = this.wwObject.style.borderStyle || 'none';
 
             return styles;
 
@@ -62,10 +74,10 @@ export default {
     methods: {
 
         getShadow() {
-            this.wwObject.content.data.style = this.wwObject.content.data.style || {};
+            this.wwObject.style = this.wwObject.style || {};
 
 
-            const shadow = this.wwObject.content.data.style.boxShadow || {};
+            const shadow = this.wwObject.style.boxShadow || {};
             if (shadow.x || shadow.y || shadow.b || shadow.s || shadow.c) {
                 return shadow.x + 'px ' + shadow.y + 'px ' + shadow.b + 'px ' + shadow.s + 'px ' + shadow.c;
             }
@@ -86,8 +98,8 @@ export default {
             try {
                 const result = await wwLib.wwPopups.open(options)
                 if (typeof (result.color) != 'undefined') {
-                    this.wwObject.content.data.backgroundColor = result.color;
-                    this.wwObject.content.data.gradient = null;
+                    this.wwObject.data.backgroundColor = result.color;
+                    this.wwObject.data.gradient = null;
                 }
 
                 this.wwObjectCtrl.update(this.wwObject);
@@ -225,14 +237,14 @@ export default {
                   COLOR
                 \================================================================================================*/
                 if (typeof (result.color) != 'undefined') {
-                    this.wwObject.content.data.backgroundColor = result.color;
-                    this.wwObject.content.data.gradient = null;
+                    this.wwObject.data.backgroundColor = result.color;
+                    this.wwObject.data.gradient = null;
                 }
                 if (typeof (result.gradient) != 'undefined') {
-                    this.wwObject.content.data.gradient = result.gradient;
+                    this.wwObject.data.gradient = result.gradient;
                 }
                 if (typeof (result.gradientColor) != 'undefined') {
-                    this.wwObject.content.data.color = result.gradientColor;
+                    this.wwObject.data.color = result.gradientColor;
                 }
 
                 /*=============================================m_ÔÔ_m=============================================\
@@ -242,22 +254,22 @@ export default {
                     this.wwObject.ratio = result.ratio;
                 }
                 if (typeof (result.borderColor) != 'undefined') {
-                    this.wwObject.content.data.style.borderColor = result.borderColor;
+                    this.wwObject.style.borderColor = result.borderColor;
                 }
                 if (typeof (result.borderRadius) != 'undefined') {
-                    this.wwObject.content.data.style.borderRadius = result.borderRadius;
+                    this.wwObject.style.borderRadius = result.borderRadius;
                 }
                 if (typeof (result.borderRadiusUnit) != 'undefined') {
-                    this.wwObject.content.data.style.borderRadiusUnit = result.borderRadiusUnit;
+                    this.wwObject.style.borderRadiusUnit = result.borderRadiusUnit;
                 }
                 if (typeof (result.borderStyle) != 'undefined') {
-                    this.wwObject.content.data.style.borderStyle = result.borderStyle;
+                    this.wwObject.style.borderStyle = result.borderStyle;
                 }
                 if (typeof (result.borderWidth) != 'undefined') {
-                    this.wwObject.content.data.style.borderWidth = result.borderWidth;
+                    this.wwObject.style.borderWidth = result.borderWidth;
                 }
                 if (typeof (result.boxShadow) != 'undefined') {
-                    this.wwObject.content.data.style.boxShadow = result.boxShadow;
+                    this.wwObject.style.boxShadow = result.boxShadow;
                 }
 
 
@@ -277,14 +289,6 @@ export default {
 
         this.el = this.$el;
 
-
-        wwLib.wwElementsStyle.applyAllStyles({
-            wwObject: this.wwObject,
-            lastWwObject: null,
-            element: this.$el,
-            noClass: false,
-            noAnim: this.wwAttrs.wwNoAnim,
-        });
         this.$emit('ww-loaded', this);
     }
 };

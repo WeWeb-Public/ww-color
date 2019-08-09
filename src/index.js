@@ -7,30 +7,6 @@ const addComponent = function () {
     if (window.vm) {
 
         wwLib.wwObject.register({
-            content: {
-                type: name,
-                data: {
-                    backgroundColor: "transparent",
-                    style: {
-                        borderRadius: 0,
-                        borderWidth: 0,
-                        borderColor: null,
-                        borderStyle: null,
-                        boxShadow: {
-                            x: 0,
-                            y: 0,
-                            b: 0,
-                            s: 0,
-                            c: ''
-                        },
-                    },
-                }
-            },
-            upsales: {
-                wwAnalytics: {
-                    click: false
-                }
-            },
             /* wwManager:start */
             cmsOptions: {
                 wwObjectMenu: {
@@ -56,8 +32,32 @@ const addComponent = function () {
                         }
                     ]
                 }
-            }
+            },
             /* wwManager:end */
+            content: {
+                type: name,
+                data: {
+                    backgroundColor: "transparent",
+                    style: {
+                        borderRadius: 0,
+                        borderWidth: 0,
+                        borderColor: null,
+                        borderStyle: null,
+                        boxShadow: {
+                            x: 0,
+                            y: 0,
+                            b: 0,
+                            s: 0,
+                            c: ''
+                        },
+                    },
+                }
+            },
+            upsales: {
+                wwAnalytics: {
+                    click: false
+                }
+            }
         });
 
         window.vm.addComponent({
