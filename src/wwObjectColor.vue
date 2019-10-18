@@ -1,5 +1,9 @@
 <template>
-    <div class="ww-color" :style="style"></div>
+    <div class="ww-color" :style="style">
+        <wwLayoutColumn v-if="wwAttrs.wwCategory !='background'" tag="div" ww-default="ww-text" ww-align="middle" :ww-list="wwObject.content.data.wwObjects" class="ww-color-layout" @ww-add="wwAdd(wwObject.content.data.wwObjects, $event)" @ww-remove="wwRemove(wwObject.content.data.wwObjects, $event)">
+            <wwObject v-for="wwObj in wwObject.content.data.wwObjects" :key="wwObj.uniqueId" :ww-object="wwObj" ww-inside-ww-object="ww-color"></wwObject>
+        </wwLayoutColumn>
+    </div>
 </template>
  
 
@@ -44,7 +48,7 @@ export default {
 
             const unit = this.wwObject.content.data.style.borderRadiusUnit || '%';
             const borderRadius = (this.wwObject.content.data.style.borderRadius / (unit == '%' ? 2 : 1) || 0) + unit;
-            styles.borderRadius = borderRadius + 'px';
+            styles.borderRadius = borderRadius;
 
             const borderWidth = w * (this.wwObject.content.data.style.borderWidth ? this.wwObject.content.data.style.borderWidth : 0) / 100;
             styles.borderWidth = borderWidth + 'px';
@@ -73,6 +77,14 @@ export default {
         },
 
         /* wwManager:start */
+        wwAdd(list, options) {
+            list.splice(options.index, 0, options.wwObject);
+            this.wwObjectCtrl.update(this.wwObject);
+        },
+        wwRemove(list, options) {
+            list.splice(options.index, 1);
+            this.wwObjectCtrl.update(this.wwObject);
+        },
         async changeColor() {
             wwLib.wwObjectHover.setLock(this);
 
@@ -286,9 +298,30 @@ export default {
             noAnim: this.wwAttrs.wwNoAnim,
         });
         this.$emit('ww-loaded', this);
+    },
+    created() {
+        /* wwManager:start */
+        if (!this.wwObject.content.data.wwObjects) {
+            this.wwObject.content.data.wwObjects = [];
+            this.wwObjectCtrl.update(this.wwObject);
+        }
+        /* wwManager:end */
     }
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.ww-color {
+    position: relative;
+
+    .ww-color-layout {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
 </style>

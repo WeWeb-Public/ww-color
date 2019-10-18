@@ -24,6 +24,7 @@ const addComponent = function () {
                             c: ''
                         },
                     },
+                    wwObjects: []
                 }
             },
             upsales: {
