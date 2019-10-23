@@ -50,7 +50,7 @@ export default {
             const borderRadius = (this.wwObject.content.data.style.borderRadius / (unit == '%' ? 2 : 1) || 0) + unit;
             styles.borderRadius = borderRadius;
 
-            const borderWidth = w * (this.wwObject.content.data.style.borderWidth ? this.wwObject.content.data.style.borderWidth : 0) / 100;
+            const borderWidth = this.wwObject.content.data.style.borderWidth ? this.wwObject.content.data.style.borderWidth : 0;
             styles.borderWidth = borderWidth + 'px';
 
             styles.borderColor = this.wwObject.content.data.style.borderColor || 'black';
