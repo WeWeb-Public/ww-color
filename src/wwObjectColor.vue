@@ -1,5 +1,10 @@
 <template>
-    <div class="ww-color" :style="style"></div>
+    <div class="ww-color" :style="style">
+        {{wwObject.style.backgroundColor}}
+        <!-- <wwLayoutColumn v-if="wwAttrs.wwCategory !='background'" tag="div" ww-default="ww-text" ww-align="middle" :ww-list="wwObject.data.wwObjects" class="ww-color-layout" @ww-add="wwAdd(wwObject.data.wwObjects, $event)" @ww-remove="wwRemove(wwObject.data.wwObjects, $event)">
+            <wwObject v-for="wwObj in wwObject.data.wwObjects" :key="wwObj.uniqueId" :ww-object="wwObj" ww-inside-ww-object="ww-color"></wwObject>
+        </wwLayoutColumn>-->
+    </div>
 </template>
  
 
@@ -7,7 +12,6 @@
 export default {
     name: "__COMPONENT_NAME__",
     props: {
-        wwObjectCtrl: Object,
         wwAttrs: {
             type: Object,
             default: {}
@@ -15,21 +19,13 @@ export default {
     },
     data() {
         return {
-            el: null,
         };
     },
     computed: {
-        wwObject() {
-            return this.wwObjectCtrl.get();
-        },
         style() {
-            if (!this.el) {
-                return {}
-            }
-
             let styles = {}
-            styles.background = this.wwObject.data.backgroundColor || 'transparent'
-            styles.backgroundImage = this.wwObject.data.gradient || '';
+            styles.background = this.wwObject.style.backgroundColor || 'transparent'
+            styles.backgroundImage = this.wwObject.style.gradient || '';
 
             let ratio = 100;
             if (this.wwAttrs.wwFixedRatio) {
@@ -51,7 +47,6 @@ export default {
             styles.boxShadow = this.getShadow();
 
             //BORDER
-            const w = this.$el.getBoundingClientRect().width;
 
 
             const unit = this.wwObject.style.borderRadiusUnit || '%';
@@ -72,11 +67,14 @@ export default {
     },
     beforeDestroy() { },
     methods: {
+        wwData() {
+            return {
+                backgroundColor: 'transparent',
+                wwObjects: []
+            }
+        },
 
         getShadow() {
-            this.wwObject.style = this.wwObject.style || {};
-
-
             const shadow = this.wwObject.style.boxShadow || {};
             if (shadow.x || shadow.y || shadow.b || shadow.s || shadow.c) {
                 return shadow.x + 'px ' + shadow.y + 'px ' + shadow.b + 'px ' + shadow.s + 'px ' + shadow.c;
@@ -85,26 +83,31 @@ export default {
         },
 
         /* wwManager:start */
+        wwAdd(list, options) {
+            list.splice(options.index, 0, options.wwObject);
+        },
+        wwRemove(list, options) {
+            list.splice(options.index, 1);
+        },
         async changeColor() {
             wwLib.wwObjectHover.setLock(this);
 
             let options = {
                 firstPage: 'COLOR_PICKER',
                 data: {
-                    wwObject: this.wwObject
+                    wwObject: this.wwObject.clone()
                 }
             }
 
             try {
                 const result = await wwLib.wwPopups.open(options)
+
                 if (typeof (result.color) != 'undefined') {
-                    this.wwObject.data.backgroundColor = result.color;
-                    this.wwObject.data.gradient = null;
+                    this.wwObject.style.backgroundColor = result.color;
+                    this.wwObject.style.gradient = null;
                 }
-
-                this.wwObjectCtrl.update(this.wwObject);
             } catch (error) {
-
+                console.log("ERROR", error);
             }
 
             wwLib.wwObjectHover.removeLock();
@@ -237,14 +240,15 @@ export default {
                   COLOR
                 \================================================================================================*/
                 if (typeof (result.color) != 'undefined') {
-                    this.wwObject.data.backgroundColor = result.color;
-                    this.wwObject.data.gradient = null;
+                    this.wwObject.style.backgroundColor = result.color;
+                    this.wwObject.style.gradient = null;
                 }
                 if (typeof (result.gradient) != 'undefined') {
-                    this.wwObject.data.gradient = result.gradient;
+                    this.wwObject.style.gradient = result.gradient;
+                    this.wwObject.style.backgroundColor = null;
                 }
                 if (typeof (result.gradientColor) != 'undefined') {
-                    this.wwObject.data.color = result.gradientColor;
+                    this.wwObject.style.color = result.gradientColor;
                 }
 
                 /*=============================================m_ÔÔ_m=============================================\
@@ -273,23 +277,47 @@ export default {
                 }
 
 
-                this.wwObjectCtrl.update(this.wwObject);
+                // this.wwObjectCtrl.update(this.wwObject);
 
-                this.wwObjectCtrl.globalEdit(result);
+                this.getWwObjectComponent().globalEdit(result);
 
             } catch (error) {
                 console.log(error);
             }
 
             wwLib.wwObjectHover.removeLock();
-        }
+        },
+
+
+        migrateData() {
+            console.log("MIGRATED", this.wwObject.style);
+            if (this.wwObject.data.backgroundColor) {
+                this.wwObject.style.backgroundColor = this.wwObject.data.backgroundColor;
+                delete this.wwObject.data.backgroundColor;
+            }
+            if (this.wwObject.data.gradient) {
+                this.wwObject.style.gradient = this.wwObject.data.gradient;
+                delete this.wwObject.data.gradient;
+            }
+        },
         /* wwManager:end */
     },
     mounted() {
-
-        this.el = this.$el;
-
         this.$emit('ww-loaded', this);
+
+        setTimeout(() => {
+            this.wwObject.style.backgroundColor = '#00FF00'
+            setTimeout(() => {
+                this.wwObject.style.backgroundColor = '#0000FF'
+            }, 3000)
+        }, 3000)
+
+        // console.log(this.wwObject);
+    },
+    created() {
+        /* wwManager:start */
+        this.migrateData();
+        /* wwManager:end */
     }
 };
 </script>
