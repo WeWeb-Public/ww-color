@@ -1,9 +1,9 @@
 <template>
     <div class="ww-color" :style="style">
-        {{wwObject.style.backgroundColor}}
-        <!-- <wwLayoutColumn v-if="wwAttrs.wwCategory !='background'" tag="div" ww-default="ww-text" ww-align="middle" :ww-list="wwObject.data.wwObjects" class="ww-color-layout" @ww-add="wwAdd(wwObject.data.wwObjects, $event)" @ww-remove="wwRemove(wwObject.data.wwObjects, $event)">
+        <!-- {{wwObject.style.backgroundColor}} -->
+        <wwLayoutColumn v-if="wwAttrs.wwCategory !='background'" tag="div" ww-default="ww-text" ww-align="middle" :ww-list="wwObject.data.wwObjects" class="ww-color-layout" @ww-add="wwAdd(wwObject.data.wwObjects, $event)" @ww-remove="wwRemove(wwObject.data.wwObjects, $event)">
             <wwObject v-for="wwObj in wwObject.data.wwObjects" :key="wwObj.uniqueId" :ww-object="wwObj" ww-inside-ww-object="ww-color"></wwObject>
-        </wwLayoutColumn>-->
+        </wwLayoutColumn>
     </div>
 </template>
  
@@ -279,7 +279,7 @@ export default {
 
                 // this.wwObjectCtrl.update(this.wwObject);
 
-                this.getWwObjectComponent().globalEdit(result);
+                this.globalEdit(result);
 
             } catch (error) {
                 console.log(error);
@@ -290,7 +290,7 @@ export default {
 
 
         migrateData() {
-            console.log("MIGRATED", this.wwObject.style);
+            // console.log("MIGRATED", this.wwObject.style);
             if (this.wwObject.data.backgroundColor) {
                 this.wwObject.style.backgroundColor = this.wwObject.data.backgroundColor;
                 delete this.wwObject.data.backgroundColor;
@@ -305,12 +305,12 @@ export default {
     mounted() {
         this.$emit('ww-loaded', this);
 
-        setTimeout(() => {
-            this.wwObject.style.backgroundColor = '#00FF00'
-            setTimeout(() => {
-                this.wwObject.style.backgroundColor = '#0000FF'
-            }, 3000)
-        }, 3000)
+        // setTimeout(() => {
+        //     this.wwObject.style.backgroundColor = '#00FF00'
+        //     setTimeout(() => {
+        //         this.wwObject.style.backgroundColor = '#0000FF'
+        //     }, 3000)
+        // }, 3000)
 
         // console.log(this.wwObject);
     },
