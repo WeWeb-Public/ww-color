@@ -5,15 +5,15 @@
 		"data": {
 			"backgroundColor": "transparent",
 			"style": {
-				"borderRadius": "0",
-				"borderWidth": "0",
-				"borderColor": "null",
-				"borderStyle": "null",
+				"borderRadius": 0,
+				"borderWidth": 0,
+				"borderColor": null,
+				"borderStyle": null,
 				"boxShadow": {
-					"x": "0",
-					"y": "0",
-					"b": "0",
-					"s": "0",
+					"x": 0,
+					"y": 0,
+					"b": 0,
+					"s": 0,
 					"c": ""
 				}
 			},
@@ -22,7 +22,7 @@
 	},
 	"upsales": {
 		"wwAnalytics": {
-			"click": "false"
+			"click": false
 		}
 	},
 	"cmsOptions": {
@@ -30,7 +30,7 @@
 			"items": [
 				{
 					"name": "OPTIONS",
-					"main": "true",
+					"main": true,
 					"text": {
 						"en": "Options",
 						"fr": "Options"
