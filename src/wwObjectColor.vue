@@ -11,7 +11,7 @@ export default {
         content: Object,
     },
     wwDefaultContent: {
-        backgroundColor: 'red'
+        backgroundColor: 'transparent'
     },
     computed: {
         style() {
