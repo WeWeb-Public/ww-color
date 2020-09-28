@@ -25,7 +25,5 @@ export default {
 <style scoped lang="scss">
 .ww-color {
     position: relative;
-    min-height: 50px;
-    min-width: 50px;
 }
 </style>
