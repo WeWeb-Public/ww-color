@@ -1,5 +1,5 @@
 {
-	"componentPath": "./src/wwObjectColor.vue",
+	"componentPath": "./src/wwColor.vue",
 	"editor": {
 		"label": {
 			"fr": "Couleur",
