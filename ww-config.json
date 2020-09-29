@@ -1,9 +1,9 @@
 {
-	"componentPath": "./src/wwColor.vue",
-	"editor": {
-		"label": {
-			"fr": "Couleur",
-			"en": "Color"
-		}
-	}
+    "componentPath": "./src/wwObject.vue",
+    "editor": {
+        "label": {
+            "fr": "Couleur",
+            "en": "Color"
+        }
+    }
 }
